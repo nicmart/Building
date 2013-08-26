@@ -1,9 +1,9 @@
 # Building
 [![Build Status](https://travis-ci.org/nicmart/Building.png?branch=master)](https://travis-ci.org/nicmart/Building)
 [![Coverage Status](https://coveralls.io/repos/nicmart/Building/badge.png?branch=master)](https://coveralls.io/r/nicmart/Building?branch=master)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/nicmart/Building/badges/quality-score.png?s=e06818508807c109a8c9354a73fc1a5227426c09)](https://scrutinizer-ci.com/g/nicmart/StringTemplate/)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/nicmart/Building/badges/quality-score.png?s=397025170a33be1128fdf16c59e2ed30265dfb9e)](https://scrutinizer-ci.com/g/nicmart/Building/)
 
-A PHP library that abstracts the definition of fluent builders..
+A PHP library that abstracts the definition of fluent builders.
 
 ## Install
 
