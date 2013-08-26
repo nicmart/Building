@@ -9,15 +9,20 @@
  */
 namespace Building\Test;
 
-use Building\FirstClass;
+use Building\AbstractBuilder;
 
 /**
  * Unit tests for class FirstClass
  */
-class FirstClassTest extends \PHPUnit_Framework_TestCase
+class AbstractBuilderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
 
+    }
+
+    public function testA()
+    {
+        $this->assertTrue(true);
     }
 }
