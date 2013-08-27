@@ -30,13 +30,13 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testRegisterProcess()
+    public function testRegisterProcessAndGetProcesses()
     {
         $this->builder
             ->registerProcess('foo', $p1 = $this->getMock('Building\BuildProcess'))
             ->registerProcess('bar', $p2 = $this->getMock('Building\BuildProcess'))
         ;
-        $this->assertAttributeSame(array('foo' => $p1, 'bar' => $p2), 'processes', $this->builder);
+        $this->assertSame(array('foo' => $p1, 'bar' => $p2), $this->builder->getProcesses());
     }
 
     public function testContextInConstructor()

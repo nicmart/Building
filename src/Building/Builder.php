@@ -47,6 +47,14 @@ class Builder
     }
 
     /**
+     * @return array|BuildProcess[]
+     */
+    public function getProcesses()
+    {
+        return $this->processes;
+    }
+
+    /**
      * @param string $name
      * @param array $args
      * @return Builder
