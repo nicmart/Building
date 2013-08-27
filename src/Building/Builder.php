@@ -17,10 +17,10 @@ namespace Building;
 class Builder
 {
     /** @var BuildProcess[] */
-    protected $processes = array();
+    private $processes = array();
 
     /** @var array Context[] */
-    protected $stack = array();
+    private $stack = array();
 
     /**
      * @param Context $context
@@ -103,7 +103,7 @@ class Builder
      * @return Context
      * @throws EmptyStackException
      */
-    protected function context()
+    private function context()
     {
         if ($this->isStackEmpty())
             throw new EmptyStackException('Builder stack is empty');
@@ -114,7 +114,7 @@ class Builder
     /**
      * @return bool
      */
-    protected function isStackEmpty()
+    private function isStackEmpty()
     {
         return !(bool) $this->stack;
     }
