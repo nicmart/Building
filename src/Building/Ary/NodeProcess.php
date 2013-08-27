@@ -38,7 +38,7 @@ class NodeProcess implements BuildProcess
     /**
      * {@inheritdoc}
      */
-    public function subvalueBuilded($subvalue)
+    public function subvalueBuilded(Context $context, $subvalue)
     {
         // Do nothing
     }

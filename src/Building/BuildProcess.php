@@ -31,8 +31,9 @@ interface BuildProcess
      * Get notified when a subvalue has been builded.
      * This is (optionally) called by a builder of a lower level
      *
+     * @param Context $context
      * @param mixed $subvalue
      * @return mixed
      */
-    public function subvalueBuilded($subvalue);
+    public function subvalueBuilded(Context $context, $subvalue);
 } 

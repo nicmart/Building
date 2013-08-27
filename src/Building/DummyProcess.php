@@ -29,8 +29,11 @@ class DummyProcess implements BuildProcess
 
     /**
      * {@inheritdoc}
+     * @param \Building\Conext|\Building\Context $context
+     * @param mixed $subvalue
+     * @return mixed|void
      */
-    public function subvalueBuilded($subvalue)
+    public function subvalueBuilded(Context $context, $subvalue)
     {
         //Do nothing
     }
