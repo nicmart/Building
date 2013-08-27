@@ -21,8 +21,8 @@ class Context
     /** @var  mixed */
     public $object;
 
-    /** @var Builder  */
-    public $builder;
+    /** @var BuildProcess  */
+    public $process;
 
     /**
      * @param mixed|null $object
@@ -31,6 +31,6 @@ class Context
     public function __construct(&$object = null, BuildProcess $process = null)
     {
         $this->object = &$object;
-        $this->builder = $process ?: new DummyProcess;
+        $this->process = $process ?: new DummyProcess;
     }
 } 
