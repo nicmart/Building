@@ -21,21 +21,16 @@ class Context
     /** @var  mixed */
     public $object;
 
-    /** @var AbstractBuilder  */
+    /** @var Builder  */
     public $builder;
 
-    /** @var array */
-    public $arguments;
-
     /**
-     * @param $object
-     * @param AbstractBuilder $builder
-     * @param array $arguments
+     * @param mixed|null $object
+     * @param BuildProcess $process
      */
-    public function __construct(&$object, AbstractBuilder $builder, array $arguments)
+    public function __construct(&$object = null, BuildProcess $process = null)
     {
         $this->object = &$object;
-        $this->builder = $builder;
-        $this->arguments = $arguments;
+        $this->builder = $process ?: new DummyProcess;
     }
 } 

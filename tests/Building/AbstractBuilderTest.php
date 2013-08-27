@@ -9,7 +9,7 @@
  */
 namespace Building\Test;
 
-use Building\AbstractBuilder;
+use Building\Builder;
 
 /**
  * Unit tests for class FirstClass

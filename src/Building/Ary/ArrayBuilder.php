@@ -11,39 +11,18 @@
 namespace Building\Ary;
 
 
-use Building\AbstractBuilder;
+use Building\Builder;
 use Building\Context;
 
-class ArrayBuilder extends AbstractBuilder
+class ArrayBuilder extends Builder
 {
     public function __construct(array &$array = array())
     {
-        $this->stack[] = new Context($array, $this, array());
+        parent::__construct(new Context($array));
 
         $this
-            ->registerBuilder('node', new NodeBuilder)
-            ->registerBuilder('push', new PushBuilder)
+            ->registerProcess('node', new NodeProcess)
+            ->registerProcess('push', new PushProcess)
         ;
     }
-
-    /**
-     * Do initial part of building and return a builder
-     *
-     * @return AbstractBuilder
-     */
-    function processStart()
-    {
-        // TODO: Implement processStart() method.
-    }
-
-    /**
-     * Do object manipulation using context args.
-     *
-     * @return mixed
-     */
-    function processArgs()
-    {
-        // TODO: Implement processArgs() method.
-    }
-
 } 
