@@ -32,9 +32,9 @@ class Context
      * @param AbstractBuilder $builder
      * @param array $arguments
      */
-    public function __construct($object, AbstractBuilder $builder, array $arguments)
+    public function __construct(&$object, AbstractBuilder $builder, array $arguments)
     {
-        $this->object = $object;
+        $this->object = &$object;
         $this->builder = $builder;
         $this->arguments = $arguments;
     }
