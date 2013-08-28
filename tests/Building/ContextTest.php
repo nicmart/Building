@@ -28,10 +28,11 @@ class ContextTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $hello = 'hello';
-        $context = new Context($hello, $this->process);
+        $context = new Context($hello, $this->process, 'name');
 
         $this->assertEquals('hello', $context->object);
         $this->assertEquals($this->process, $context->process);
+        $this->assertEquals('name', $context->name);
     }
 
     public function testObjectIsPassedByReference()

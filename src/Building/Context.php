@@ -25,12 +25,19 @@ class Context
     public $process;
 
     /**
+     * @var string
+     */
+    public $name;
+
+    /**
      * @param mixed|null $object
      * @param BuildProcess $process
+     * @param string $name
      */
-    public function __construct(&$object = null, BuildProcess $process = null)
+    public function __construct(&$object = null, BuildProcess $process = null, $name = '')
     {
         $this->object = &$object;
         $this->process = $process ?: new DummyProcess;
+        $this->name = $name;
     }
 } 
