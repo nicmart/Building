@@ -26,6 +26,6 @@ class ArgumentsProcess extends AbstractProcess
 
     public function subvalueBuilded(Context $context, &$subvalue)
     {
-        $context->object->arguments[] = &$subvalue;
+        $context->object[] = &$subvalue;
     }
 }

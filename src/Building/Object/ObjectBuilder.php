@@ -24,7 +24,7 @@ class ObjectBuilder extends Builder
             ->registerProcess('object', $objectProc = new ObjectProcess)
             ->registerProcess('method', new MethodProcess())
             ->registerProcess('prop', new PropertyProcess)
-            ->registerProcess('arguments', new ObjectProcess)
+            ->registerProcess('arguments', new ArgumentsProcess)
         ;
 
         parent::__construct(new Context(new ObjectDefinition($className), $objectProc, 'object'));

@@ -10,7 +10,6 @@
 
 namespace Building\Object;
 
-
 class ObjectDefinition
 {
     public $className;
@@ -21,7 +20,7 @@ class ObjectDefinition
     /**
      * @param string $className
      */
-    public function __constructor($className)
+    public function __construct($className)
     {
         $this->className = $className;
     }
@@ -31,10 +30,9 @@ class ObjectDefinition
         $ref = new \ReflectionClass($this->className);
         $object = $ref->newInstanceArgs($this->resolveValues($this->arguments));
 
-        foreach ($this->propertiesSet as $keyValue)
+        foreach ($this->propertiesSet as $propertyName => $propertyValue)
         {
-            list($prop, $value) = $keyValue;
-            $object->$prop = $this->resolveValue($value);
+            $object->$propertyName = $this->resolveValue($propertyValue);
         }
 
         foreach ($this->methodCalls as $methodAndArgs)
