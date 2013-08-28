@@ -64,8 +64,11 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('subvalueBuilded')
             ->with($this->equalTo($secondCContext = new Context($object, $p1)), $this->equalTo('subvalue'));
+        $p1
+            ->expects($this->once())
+            ->method('finalize')
+            ->with($this->equalTo($secondCContext));
 
-        $object = 'val';
         $p2 = $this->getMock('\Building\BuildProcess');
         $p2
             ->expects($this->once())

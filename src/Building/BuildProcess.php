@@ -28,6 +28,14 @@ interface BuildProcess
     public function build(Context $context);
 
     /**
+     * Optionally do something on the current scope before leaving it
+     *
+     * @param Context $context
+     * @return mixed
+     */
+    public function finalize(Context $context);
+
+    /**
      * Get notified when a subvalue has been builded.
      * This is (optionally) called by a builder of a lower level
      *

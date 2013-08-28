@@ -8,15 +8,10 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building;
+namespace Building\Object;
 
-/**
- * Class DummyProcess
- *
- * Empty process used to bootstrap the builders context.
- *
- * @package Building
- */
-class DummyProcess extends AbstractProcess
+
+class ObjectProcess
 {
-}
+
+} 

@@ -10,8 +10,7 @@
 
 namespace Building\Ary;
 
-use Building\Builder;
-use Building\BuildProcess;
+use Building\AbstractProcess;
 use Building\Context;
 
 /**
@@ -19,7 +18,7 @@ use Building\Context;
  *
  * @package Building
  */
-class PushProcess implements BuildProcess
+class PushProcess extends AbstractProcess
 {
     /**
      * {@inheritdoc}
@@ -33,13 +32,5 @@ class PushProcess implements BuildProcess
             ? new Context($buildValue, $this)
             : null
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function subvalueBuilded(Context $context, $subvalue)
-    {
-        // Do nothing
     }
 }

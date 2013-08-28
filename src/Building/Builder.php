@@ -87,6 +87,8 @@ class Builder
      */
     public function end()
     {
+        $this->context()->process->finalize($this->context());
+
         array_pop($this->stack);
 
         return $this;
