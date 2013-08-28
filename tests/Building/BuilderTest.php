@@ -92,6 +92,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $b->build('foo', array('hey', 'man'));
         $this->assertAttributeSame(array($startContext), 'stack', $b);
+        $this->assertEquals('foo', $startContext->name);
 
         $b->build('bar');
         $this->assertAttributeSame(array($startContext, $secondCContext), 'stack', $b);

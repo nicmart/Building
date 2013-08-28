@@ -62,6 +62,7 @@ class Builder
     public function build($name, array $args = array())
     {
         $process = $this->processes[$name];
+        $this->context()->name = $name;
         array_unshift($args, $this->context());
 
         if ($context = call_user_func_array(array($process, 'build'), $args)) {
