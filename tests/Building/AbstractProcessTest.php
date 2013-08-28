@@ -53,7 +53,8 @@ class AbstractProcessTest extends \PHPUnit_Framework_TestCase
 
     public function testSubvalueBuilded()
     {
-        $this->process->subvalueBuilded($this->context, 'hello');
+        $a = 'hello';
+        $this->process->subvalueBuilded($this->context, $a);
 
         $this->assertEquals($this->contextCopy, $this->context);
     }

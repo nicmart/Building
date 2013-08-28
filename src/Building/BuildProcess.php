@@ -43,5 +43,5 @@ interface BuildProcess
      * @param mixed $subvalue
      * @return mixed
      */
-    public function subvalueBuilded(Context $context, $subvalue);
+    public function subvalueBuilded(Context $context, &$subvalue);
 } 

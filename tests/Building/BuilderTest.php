@@ -75,12 +75,13 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             ->method('build')
             ->will($this->returnValue($secondCContext));
 
+        $subvalue = 'subvalue';
         $p3 = $this->getMock('\Building\BuildProcess');
         $p3
             ->expects($this->once())
             ->method('build')
-            ->will($this->returnCallback(function(Context $context) {
-                $context->process->subvalueBuilded($context, 'subvalue');
+            ->will($this->returnCallback(function(Context $context) use (&$subvalue) {
+                $context->process->subvalueBuilded($context, $subvalue);
                 return null;
             }));
 

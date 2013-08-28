@@ -11,7 +11,21 @@
 namespace Building\Object;
 
 
-class ObjectProcess
-{
+use Building\AbstractProcess;
+use Building\Context;
 
-} 
+class ObjectProcess extends AbstractProcess
+{
+    /**
+     * @param Context $context
+     * @param string $className
+     * @return Context|null
+     */
+    public function build(Context $context, $className = 'stdClass')
+    {
+        $def = new ObjectDefinition($className);
+        $context->process->subvalueBuilded($context, $def);
+
+        return new Context($def, $this);
+    }
+}
