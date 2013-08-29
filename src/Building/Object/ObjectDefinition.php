@@ -49,6 +49,8 @@ class ObjectDefinition
     {
         if ($value instanceof self)
             return $value->getObject();
+        elseif (is_array($value))
+            return $this->resolveValues($value);
 
         return $value;
     }
