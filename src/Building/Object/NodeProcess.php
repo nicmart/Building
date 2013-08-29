@@ -8,10 +8,9 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Ary;
+namespace Building\Object;
 
 use Building\AbstractProcess;
-use Building\BuildProcess;
 use Building\Context;
 
 /**
@@ -27,12 +26,24 @@ class NodeProcess extends  AbstractProcess
      */
     public function build(Context $context, $key = 0, $value = null)
     {
-        $buildValue = isset($value) ? $value : array();
+        $newContext = new Context($context, array($key, $value), $this);
 
-        $context->object[$key] = &$buildValue;
+        if (!isset($value))
+            return $newContext;
 
-        return !isset($value)
-            ? new Context($buildValue, $this)
-            : null;
+        $this->finalize($newContext);
+
+        return null;
+    }
+
+    public function subvalueBuilded(Context $context, $subvalue)
+    {
+        $context->object[1] = $subvalue;
+    }
+
+    public function finalize(Context $context)
+    {
+        list($key, $value) = $context->object;
+        $context->previous->object[$key] = $value;
     }
 }

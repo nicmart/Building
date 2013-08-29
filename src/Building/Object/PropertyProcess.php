@@ -18,16 +18,25 @@ class PropertyProcess extends AbstractProcess
 {
     public function build(Context $context, $propName = 'prop', $propValue = null)
     {
-        $context->object->propertiesSet[$propName] = $propValue;
+        $newContext = new Context($context, array($propName, $propValue), $this);
 
         if (!isset($propValue))
-            return new Context($context->object->propertiesSet[$propName], $this);
+            return $newContext;
+
+        $this->finalize($newContext);
 
         return null;
     }
 
-    public function subvalueBuilded(Context $context, &$subvalue)
+    public function subvalueBuilded(Context $context, $subvalue)
     {
-        $context->object = $subvalue;
+        $context->object[1] = $subvalue;
+    }
+
+    public function finalize(Context $context)
+    {
+        $objDef = $context->previous->object;
+        list($propName, $propValue) = $context->object;
+        $objDef->propertiesSet[$propName] = $propValue;
     }
 }

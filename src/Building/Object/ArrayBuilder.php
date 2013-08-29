@@ -8,7 +8,7 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Ary;
+namespace Building\Object;
 
 
 use Building\Builder;
@@ -18,11 +18,13 @@ class ArrayBuilder extends Builder
 {
     public function __construct(array &$array = array())
     {
-        parent::__construct(new Context($array));
-
         $this
+            ->registerProcess('array', $aryProcess = new ArrayProcess)
+            ->registerProcess('value', new ScalarProcess)
             ->registerProcess('node', new NodeProcess)
             ->registerProcess('push', new PushProcess)
         ;
+
+        parent::__construct(new Context(null, $array, $aryProcess));
     }
 } 

@@ -39,8 +39,7 @@ abstract class AbstractProcess implements BuildProcess
      * @param mixed $subvalue
      * @return mixed|void
      */
-    public function subvalueBuilded(Context $context, &$subvalue)
+    public function subvalueBuilded(Context $context, $subvalue)
     {
     }
-
 } 

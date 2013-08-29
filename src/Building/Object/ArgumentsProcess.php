@@ -18,14 +18,16 @@ class ArgumentsProcess extends AbstractProcess
 {
     public function build(Context $context)
     {
-        $args = array();
-        $context->object->arguments = &$args;
-
-        return new Context($args, $this);
+        return new Context($context, array(), $this);
     }
 
-    public function subvalueBuilded(Context $context, &$subvalue)
+    public function subvalueBuilded(Context $context, $subvalue)
     {
-        $context->object[] = &$subvalue;
+        $context->object[] = $subvalue;
+    }
+
+    public function finalize(Context $context)
+    {
+        $context->previous->object->arguments[] = $context->object;
     }
 }

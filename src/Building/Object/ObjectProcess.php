@@ -23,9 +23,14 @@ class ObjectProcess extends AbstractProcess
      */
     public function build(Context $context, $className = 'stdClass')
     {
-        $def = new ObjectDefinition($className);
-        $context->process->subvalueBuilded($context, $def);
+        return new Context($context, new ObjectDefinition($className), $this);
+    }
 
-        return new Context($def, $this);
+    /**
+     * {@inheritdoc}
+     */
+    public function finalize(Context $context)
+    {
+        $context->notifyParent();
     }
 }

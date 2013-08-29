@@ -10,17 +10,25 @@
 
 namespace Building\Object;
 
-
 use Building\AbstractProcess;
 use Building\Context;
 
-class MethodProcess extends AbstractProcess
+/**
+ * Class NodeProcess
+ * An simple example of a builder for arrays. Go to the examples directory to see it working.
+ *
+ * @package Building
+ */
+class PushProcess extends  AbstractProcess
 {
-    public function build(Context $context, $methodName = 'prop', $args = array())
+    /**
+     * {@inheritdoc}
+     */
+    public function build(Context $context, $value = null)
     {
-        $newContext = new Context($context, array($methodName, $args), $this);
+        $newContext = new Context($context, $value, $this);
 
-        if (!$args)
+        if (!isset($value))
             return $newContext;
 
         $this->finalize($newContext);
@@ -30,15 +38,14 @@ class MethodProcess extends AbstractProcess
 
     public function subvalueBuilded(Context $context, $subvalue)
     {
-        $context->object[1][] = $subvalue;
+        $context->object = $subvalue;
     }
-
 
     /**
      * {@inheritdoc}
      */
     public function finalize(Context $context)
     {
-        $context->previous->object->methodCalls[] = $context->object;
+        $context->previous->object[] = $context->object;
     }
 }

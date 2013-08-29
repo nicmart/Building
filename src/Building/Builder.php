@@ -19,8 +19,8 @@ class Builder
     /** @var BuildProcess[] */
     private $processes = array();
 
-    /** @var array Context[] */
-    private $stack = array();
+    /** @var  Context */
+    private $context;
 
     /**
      * @param Context $context
@@ -30,7 +30,7 @@ class Builder
         if (!isset($context))
             $context = new Context;
 
-        $this->stack[] = $context;
+        $this->context = $context;
     }
 
     /**
@@ -62,11 +62,11 @@ class Builder
     public function build($name, array $args = array())
     {
         $process = $this->processes[$name];
-        $this->context()->name = $name;
-        array_unshift($args, $this->context());
+        $this->context->name = $name;
+        array_unshift($args, $this->context);
 
         if ($context = call_user_func_array(array($process, 'build'), $args)) {
-            $this->stack[] = $context;
+            $this->context = $context;
         }
 
         return $this;
@@ -88,45 +88,17 @@ class Builder
      */
     public function end()
     {
-        $this->context()->process->finalize($this->context());
-
-        array_pop($this->stack);
+        $this->context->process->finalize($this->context);
+        $this->context = $this->context->previous;
 
         return $this;
     }
 
     /**
      * @return mixed
-     *
-     * @throws EmptyStackException
      */
     public function get()
     {
-        if ($this->isStackEmpty())
-            throw new EmptyStackException('Builder stack is empty');
-
-        return $this->context()->object;
-    }
-
-    /**
-     * Return the current context
-     *
-     * @return Context
-     * @throws EmptyStackException
-     */
-    private function context()
-    {
-        if ($this->isStackEmpty())
-            throw new EmptyStackException('Builder stack is empty');
-
-        return $this->stack[count($this->stack) - 1];
-    }
-
-    /**
-     * @return bool
-     */
-    private function isStackEmpty()
-    {
-        return !(bool) $this->stack;
+        return $this->context->object;
     }
 } 

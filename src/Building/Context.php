@@ -30,14 +30,34 @@ class Context
     public $name;
 
     /**
+     * @var Context
+     */
+    public $previous;
+
+    /**
+     * @param null|Context $previous
      * @param mixed|null $object
      * @param BuildProcess $process
      * @param string $name
      */
-    public function __construct(&$object = null, BuildProcess $process = null, $name = '')
+    public function __construct(Context $previous = null, $object = null, BuildProcess $process = null, $name = '')
     {
-        $this->object = &$object;
+        $this->object = $object;
         $this->process = $process ?: new DummyProcess;
         $this->name = $name;
+        $this->previous = $previous ?: $this;
+    }
+
+    /**
+     * @return $this The current instance
+     */
+    public function notifyParent()
+    {
+        $this->previous->process->subvalueBuilded(
+            $this->previous,
+            $this->object
+        );
+
+        return $this;
     }
 } 

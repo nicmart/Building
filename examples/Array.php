@@ -10,7 +10,7 @@
 
 include '../vendor/autoload.php';
 
-use Building\Ary\ArrayBuilder;
+use Building\Object\ArrayBuilder;
 
 $b = new ArrayBuilder();
 
@@ -23,10 +23,12 @@ $b
         ->node('moo', 'ok')
     ->end()
     ->node('foonode')
-        ->node('thomas', 'recording')
-        ->push()
-            ->push('ciao')
-            ->node('foo', 'bar')
+        ->array()
+            ->node('thomas', 'recording')
+            ->push()->array()
+                ->push('ciao')
+                ->node('foo', 'bar')
+            ->end()->end()
         ->end()
     ->end()
 ;

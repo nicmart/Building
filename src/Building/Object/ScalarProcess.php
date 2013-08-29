@@ -21,7 +21,8 @@ class ScalarProcess extends AbstractProcess
      */
     public function build(Context $context, $value = null)
     {
-        $context->process->subvalueBuilded($context, $value);
+        $newContext = new Context($context, $value, $this);
+        $newContext->notifyParent();
 
         return null;
     }

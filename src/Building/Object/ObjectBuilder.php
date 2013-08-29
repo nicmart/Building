@@ -11,6 +11,8 @@
 namespace Building\Object;
 
 
+use Building\Ary\NodeProcess;
+use Building\Ary\PushProcess;
 use Building\Builder;
 use Building\Context;
 
@@ -25,8 +27,10 @@ class ObjectBuilder extends Builder
             ->registerProcess('method', new MethodProcess())
             ->registerProcess('prop', new PropertyProcess)
             ->registerProcess('arguments', new ArgumentsProcess)
+            ->registerProcess('node', new NodeProcess)
+            ->registerProcess('push', new PushProcess)
         ;
 
-        parent::__construct(new Context(new ObjectDefinition($className), $objectProc, 'object'));
+        parent::__construct(new Context(null, new ObjectDefinition($className), $objectProc, 'object'));
     }
 } 

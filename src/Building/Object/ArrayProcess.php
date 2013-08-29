@@ -21,9 +21,14 @@ class ArrayProcess extends AbstractProcess
      */
     public function build(Context $context)
     {
-        $ary = array();
-        $context->process->subvalueBuilded($context, $ary);
+        return new Context($context, array(), $this);
+    }
 
-        return new Context($ary, $this);
+    /**
+     * {@inheritdoc}
+     */
+    public function finalize(Context $context)
+    {
+        $context->notifyParent();
     }
 }

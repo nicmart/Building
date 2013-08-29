@@ -28,6 +28,19 @@ $b
     ->end()
     ->prop('foo', 'bar')
     ->method('method', array(1,2,3))
+    ->prop('arrayProp')
+        ->array()
+            ->node('ary')
+                ->array()
+                    ->push(1)->push(2)
+                ->end()
+            ->end()
+            ->push('val')
+            ->push()
+                ->object('Building\Object\Object')->prop('a', 'b')->end()
+            ->end()
+        ->end()
+    ->end()
 ;
 
 var_dump($b->get());
