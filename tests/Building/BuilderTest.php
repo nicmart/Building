@@ -42,16 +42,16 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     public function testContextInConstructor()
     {
         $object = 'ah';
-        $builder = new Builder($context = new Context($object, $this->getMock('Building\BuildProcess')));
+        $builder = new Builder($context = new Context(null, $object, $this->getMock('Building\BuildProcess')));
 
-        $this->assertAttributeSame(array($context), 'stack', $builder);
+        $this->assertAttributeSame($context, 'context', $builder);
     }
 
     public function testBuild()
     {
 
         $start = 'start';
-        $b = new Builder($startContext = new Context($start, new DummyProcess()));
+        $b = new Builder($startContext = new Context(null, $start, new DummyProcess()));
 
         $p1 = $this->getMock('Building\BuildProcess');
         $p1
@@ -63,7 +63,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         $p1
             ->expects($this->once())
             ->method('subvalueBuilded')
-            ->with($this->equalTo($secondCContext = new Context($object, $p1)), $this->equalTo('subvalue'));
+            ->with($this->equalTo($secondCContext = new Context($startContext, 'ah', $p1)), $this->equalTo('subvalue'));
         $p1
             ->expects($this->once())
             ->method('finalize')
@@ -92,18 +92,18 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         ;
 
         $b->build('foo', array('hey', 'man'));
-        $this->assertAttributeSame(array($startContext), 'stack', $b);
+        $this->assertAttributeSame($startContext, 'context', $b);
         $this->assertEquals('foo', $startContext->name);
 
         $b->build('bar');
-        $this->assertAttributeSame(array($startContext, $secondCContext), 'stack', $b);
+        $this->assertAttributeSame($secondCContext, 'context', $b);
 
         //__call magic call
         $b->baz();
-        $this->assertAttributeSame(array($startContext, $secondCContext), 'stack', $b);
+        $this->assertAttributeEquals($secondCContext, 'context', $b);
 
         $b->end();
-        $this->assertAttributeSame(array($startContext), 'stack', $b);
+        $this->assertAttributeEquals($startContext, 'context', $b);
 
         $this->assertEquals('start', $b->get());
     }

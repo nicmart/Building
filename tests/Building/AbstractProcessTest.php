@@ -33,8 +33,8 @@ class AbstractProcessTest extends \PHPUnit_Framework_TestCase
     {
         $this->process = $this->getMock('Building\AbstractProcess', null);
         $obj = $obj2 = 'foo';
-        $this->context = new Context($obj, $this->process);
-        $this->contextCopy = new Context($obj2, $this->process);
+        $this->context = new Context(null, $obj, $this->process);
+        $this->contextCopy = new Context(null, $obj2, $this->process);
     }
 
     public function testBuild()
