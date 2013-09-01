@@ -63,11 +63,24 @@ class Builder
     {
         $process = $this->processes[$name];
         $this->context->name = $name;
-        array_unshift($args, $this->context);
 
-        if ($context = call_user_func_array(array($process, 'build'), $args)) {
-            $this->context = $context;
+        //Avoid a bit of call_user_func_array overhead
+        //See for example https://wiki.php.net/rfc/argument_unpacking and
+        //https://gist.github.com/nikic/6390366
+        switch (count($args)) {
+            case 0: $context = $process->build($this->context); break;
+            case 1: $context = $process->build($this->context, $args[0]); break;
+            case 2: $context = $process->build($this->context, $args[0], $args[1]); break;
+            case 3: $context = $process->build($this->context, $args[0], $args[1], $args[2]); break;
+            case 4: $context = $process->build($this->context, $args[0], $args[1], $args[2], $args[3]); break;
+            case 5: $context = $process->build($this->context, $args[0], $args[1], $args[2], $args[3], $args[4]); break;
+            default:
+                array_unshift($args, $this->context);
+                $context = call_user_func_array(array($process, 'build'), $args);
         }
+
+        if ($context)
+            $this->context = $context;
 
         return $this;
     }
