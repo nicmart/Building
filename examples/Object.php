@@ -8,7 +8,7 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Object;
+namespace NicMart\Building\Object;
 include '../vendor/autoload.php';
 
 ini_set('xdebug.var_display_max_depth', '10');

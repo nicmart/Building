@@ -10,7 +10,7 @@
 
 include '../vendor/autoload.php';
 
-use Building\Object\ArrayBuilder;
+use NicMart\Building\Object\ArrayBuilder;
 
 $b = new ArrayBuilder();
 

@@ -8,7 +8,7 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building;
+namespace NicMart\Building;
 
 /**
  * Class Context.

@@ -11,15 +11,15 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.4"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
-        "psr-0": {
-            "Building": "src/",
-            "Building\\Test": "tests"
+        "psr-4": {
+            "NicMart\\Building\\": "src/",
+            "NicMart\\Building\\Test\\": "tests"
         }
     }
 }

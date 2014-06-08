@@ -8,12 +8,12 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Test;
+namespace NicMart\Building\Test;
 
 
-use Building\Builder;
-use Building\BuildProcess;
-use Building\Context;
+use NicMart\Building\Builder;
+use NicMart\Building\BuildProcess;
+use NicMart\Building\Context;
 
 class ContextTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->process = $this->getMock('Building\BuildProcess');
+        $this->process = $this->getMock('NicMart\Building\BuildProcess');
     }
 
     public function testConstructor()

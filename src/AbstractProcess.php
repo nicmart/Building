@@ -8,20 +8,22 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Object;
+namespace NicMart\Building;
 
-
-use Building\AbstractProcess;
-use Building\Context;
-
-class ArrayProcess extends AbstractProcess
+/**
+ * Class AbstractProcess
+ * An abstract process that does nothing.
+ *
+ * @package Building
+ */
+abstract class AbstractProcess implements BuildProcess
 {
     /**
      * {@inheritdoc}
      */
     public function build(Context $context)
     {
-        return new Context($context, array(), $this);
+        return null;
     }
 
     /**
@@ -29,6 +31,15 @@ class ArrayProcess extends AbstractProcess
      */
     public function finalize(Context $context)
     {
-        $context->notifyParent();
     }
-}
+
+    /**
+     * {@inheritdoc}
+     * @param Context $context
+     * @param mixed $subvalue
+     * @return mixed|void
+     */
+    public function subvalueBuilded(Context $context, $subvalue)
+    {
+    }
+} 

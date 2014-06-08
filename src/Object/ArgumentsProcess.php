@@ -8,11 +8,11 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Object;
+namespace NicMart\Building\Object;
 
 
-use Building\AbstractProcess;
-use Building\Context;
+use NicMart\Building\AbstractProcess;
+use NicMart\Building\Context;
 
 class ArgumentsProcess extends AbstractProcess
 {

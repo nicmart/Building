@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of library-template
+ * This file is part of DomainSpecificQuery
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -8,15 +8,12 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building;
+namespace NicMart\Building;
 
 /**
- * Class DummyProcess
- *
- * Empty process used to bootstrap the builders context.
- *
+ * Class EmptyStackException
  * @package Building
  */
-class DummyProcess extends AbstractProcess
+class EmptyStackException extends \UnderflowException
 {
-}
+} 

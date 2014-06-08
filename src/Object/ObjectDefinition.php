@@ -8,7 +8,7 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Object;
+namespace NicMart\Building\Object;
 
 class ObjectDefinition
 {

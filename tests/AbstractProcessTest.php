@@ -8,11 +8,11 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Test;
+namespace NicMart\Building\Test;
 
 
-use Building\AbstractProcess;
-use Building\Context;
+use NicMart\Building\AbstractProcess;
+use NicMart\Building\Context;
 
 class AbstractProcessTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class AbstractProcessTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->process = $this->getMock('Building\AbstractProcess', null);
+        $this->process = $this->getMock('NicMart\Building\AbstractProcess', null);
         $obj = $obj2 = 'foo';
         $this->context = new Context(null, $obj, $this->process);
         $this->contextCopy = new Context(null, $obj2, $this->process);

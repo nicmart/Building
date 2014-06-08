@@ -8,11 +8,11 @@
  * @author Nicolò Martini <nicmartnic@gmail.com>
  */
 
-namespace Building\Object;
+namespace NicMart\Building\Object;
 
 
-use Building\Builder;
-use Building\Context;
+use NicMart\Building\Builder;
+use NicMart\Building\Context;
 
 class ArrayBuilder extends Builder
 {
