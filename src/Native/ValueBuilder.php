@@ -34,6 +34,16 @@ class ValueBuilder extends AbstractBuilder
         return new ArrayBuilder($this->getSetCallback());
     }
 
+    /**
+     * @param string $class
+     *
+     * @return ObjectBuilder
+     */
+    public function object($class)
+    {
+        return new ObjectBuilder($class, $this->getSetCallback());
+    }
+
     private function getSetCallback()
     {
         return function($value)
