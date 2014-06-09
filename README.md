@@ -14,7 +14,7 @@ Just create a composer.json file for your project:
 ```JSON
 {
     "require": {
-        "nicmart/building": "dev-master"
+        "nicmart/building": "~0.2"
     }
 }
 ```
