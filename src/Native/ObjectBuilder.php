@@ -94,6 +94,9 @@ class ObjectBuilder extends AbstractBuilder
     {
         return function($value) use ($propName)
         {
+            if (!isset($this->building))
+                $this->building = new $this->class;
+
             $this->building->$propName = $value;
 
             return $this;
@@ -104,6 +107,9 @@ class ObjectBuilder extends AbstractBuilder
     {
         return function(array $arguments) use ($methodName)
         {
+            if (!isset($this->building))
+                $this->building = new $this->class;
+
             call_user_func_array([$this->building, $methodName], $arguments);
 
             return $this;

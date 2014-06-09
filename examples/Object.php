@@ -9,42 +9,45 @@
  */
 
 namespace NicMart\Building\Object;
+use NicMart\Building\Native\ObjectBuilder;
+
 include '../vendor/autoload.php';
 
 ini_set('xdebug.var_display_max_depth', '10');
 
-$b = new ObjectBuilder('Building\Object\Object');
+$b = new ObjectBuilder('NicMart\Building\Object\Object');
 
 $b
     ->arguments()
-        ->value('foo')
-        ->value('bar')
-        ->object('Building\Object\Object')
+        ->push('foo')
+        ->push('bar')
+        ->object('NicMart\Building\Object\Object')
             ->method('foo')
-                ->value(12)
-                ->value('arg')
+                ->push(12)
+                ->push('arg')
             ->end()
         ->end()
     ->end()
     ->prop('foo', 'bar')
-    ->method('method', array(1,2,3))
+    ->method('method', 1, 2, 3)
     ->prop('arrayProp')
-        ->array()
-            ->node('ary')
-                ->array()
-                    ->push(1)->push(2)
-                ->end()
+        ->ary()
+            ->set('ary')
+                ->push(1)
+                ->push(2)
             ->end()
             ->push('val')
             ->push()
-                ->object('Building\Object\Object')->prop('a', 'b')->end()
+                ->object('NicMart\Building\Object\Object')
+                    ->prop('a', 'b')
+                ->end()
             ->end()
         ->end()
     ->end()
 ;
 
-var_dump($b->get());
-var_dump($b->get()->getObject()->log);
+var_dump($object = $b->end());
+var_dump($object->log);
 
 class Object
 {

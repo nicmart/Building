@@ -33,11 +33,11 @@ class ArrayBuilderTest extends \PHPUnit_Framework_TestCase
 
         $ary = $builder
             ->push()
-                ->set("foo")
+                ->push("foo")
             ->end()
         ->end();
 
-        $this->assertSame(["foo"], $ary);
+        $this->assertSame([["foo"]], $ary);
     }
 
     public function testSet()
@@ -57,10 +57,10 @@ class ArrayBuilderTest extends \PHPUnit_Framework_TestCase
 
         $ary = $builder
             ->set('foo')
-                ->set("fooval")
+                ->push("fooval")
             ->end()
         ->end();
 
-        $this->assertSame(["foo" => "fooval"], $ary);
+        $this->assertSame(["foo" => ["fooval"]], $ary);
     }
 }

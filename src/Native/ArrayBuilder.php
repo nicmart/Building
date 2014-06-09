@@ -35,7 +35,15 @@ class ArrayBuilder extends AbstractBuilder
             return $this;
         }
 
-        return new ValueBuilder($this->getPushCallback());
+        return new static($this->getPushCallback());
+    }
+
+    /**
+     * @return ObjectBuilder
+     */
+    public function object($class)
+    {
+        return new ObjectBuilder($class, $this->getPushCallback());
     }
 
     /**
@@ -51,7 +59,7 @@ class ArrayBuilder extends AbstractBuilder
             return $this;
         }
 
-        return new ValueBuilder($this->getSetCallback($key));
+        return new static($this->getSetCallback($key));
     }
 
     private function getPushCallback()

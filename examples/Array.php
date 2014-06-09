@@ -10,27 +10,26 @@
 
 include '../vendor/autoload.php';
 
-use NicMart\Building\Object\ArrayBuilder;
+use NicMart\Building\Native\ArrayBuilder;
 
 $b = new ArrayBuilder();
 
-$b
+$ary = $b
     ->push('a')
     ->push('b')
     ->push()
         ->push('a')
-        ->node('foo', 'bar')
-        ->node('moo', 'ok')
+        ->set('foo', 'bar')
+        ->set('moo', 'ok')
     ->end()
-    ->node('foonode')
-        ->array()
-            ->node('thomas', 'recording')
-            ->push()->array()
-                ->push('ciao')
-                ->node('foo', 'bar')
-            ->end()->end()
+    ->set('foonode')
+        ->set('thomas', 'recording')
+        ->push()
+            ->push('ciao')
+            ->set('foo', 'bar')
         ->end()
     ->end()
+->end()
 ;
 
-var_dump($b->get());
+var_dump($ary);

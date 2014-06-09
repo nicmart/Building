@@ -33,10 +33,8 @@ class ValueBuilderTest extends \PHPUnit_Framework_TestCase
                 ->push('a')
                 ->push('b')
                 ->set('foo')
-                    ->ary()
-                        ->push('bar')
-                        ->push('baz')
-                    ->end()
+                    ->push('bar')
+                    ->push('baz')
                 ->end()
             ->end()
         ->end();
