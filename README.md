@@ -15,7 +15,7 @@ adding an easy-to-read and easy-to-write separate API on top of your object API.
 The builder offers an alternative API for the construction of your objects, and its fluent interface helps
 the code to be readable and more [DSL](http://en.wikipedia.org/wiki/Domain-specific_language)-oriented.
 
-## How this builder work
+## How Building works
 
 The approach of this library is to use nested builders to define complex objects. Basically the building process is:
 
