@@ -13,7 +13,7 @@ In that case you can benefit from a [Fluent Builder](http://martinfowler.com/dsl
 adding an easy-to-read and easy-to-write separate API on top of your object API.
 
 The builder offers an alternative API for the construction of your objects, and its fluent interface helps
-the code to be readable and more DSL-oriented.
+the code to be readable and more [DSL](http://en.wikipedia.org/wiki/Domain-specific_language)-oriented.
 
 ## How this builder work
 
@@ -31,10 +31,11 @@ what doing with the builded object is completely on the parent builder.
 
 ## Drawbacks
 
-You have to be aware of some drawbacks of fluent interface in general:
+You have to be aware of some drawbacks of fluent interface and method chaining in general:
 
 - Code completion: although there is no use of magic methods, the specific builder type returned by the `end()`
   is known only at runtime, so IDES fail to autocomplete builder methods after an `end()`.
+- You often violate the [Law Of Demeter](http://en.wikipedia.org/wiki/Law_of_Demeter) when using nested builders.
 - [Marco Pivetta](https://twitter.com/Ocramius) thinks that
 [fluent interfaces are evil](http://ocramius.github.io/blog/fluent-interfaces-are-evil/). There are a lot of good points
  there, but I think that the concept of "Contract" expressed there is much more restrictive than the language itself
