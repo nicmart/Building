@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/nicmart/Building.png?branch=master)](https://travis-ci.org/nicmart/Building)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/nicmart/Building/badges/quality-score.png?s=397025170a33be1128fdf16c59e2ed30265dfb9e)](https://scrutinizer-ci.com/g/nicmart/Building/)
 
-Building, more than a library, is a suggestion on how to model fluent builders in your code.
+Building is, more than a library, a suggestion on how to model fluent builders in your php code.
 
 ## What is a fluent builder
 
