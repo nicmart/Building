@@ -214,9 +214,13 @@ The last `end()` automatically returns the builded object because, by default,
 the abstract builder class sets for itself a callback that returns
 the builded value.
 
+### Other examples
+For testing purposes I have included an [ArrayBuilder](https://github.com/nicmart/Building/blob/master/examples/Array.php) 
+and an [ObjectBuilder](https://github.com/nicmart/Building/blob/master/examples/Object.php) in the repository.
+
 ## Drawbacks
 
-You have to be aware of some drawbacks of fluent interface and method chaining in general:
+You have to be aware of some drawbacks of fluent interfaces and method chaining in general:
 
 - Code completion: although there is no use of magic methods, the specific builder type returned by the `end()`
   is known only at runtime, so IDES fail to autocomplete builder methods after an `end()`.
