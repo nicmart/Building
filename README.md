@@ -17,21 +17,17 @@ the code to be readable and more [DSL](http://en.wikipedia.org/wiki/Domain-speci
 
 ## How Building works
 
-The approach of this library is to use nested builders to define complex objects. Basically the building process is:
+The approach of this library is to use nested builders to define complex objects, and the main
+point of the library is to pass a "finalizing callback" from the parent builder to the child builder
+that will be called by the child builder when the subvalue has been built.
 
-1. Builder creation - this usually initialize the object to be built
-2. Object manipulation - The builder provides some method to directly manipulate the object
-3. SubBuilder delegation - The most important part. The builder creates and return a subbuilder, passing a
- a callback to it that will be called when the subvalue will be built.
-4. The SubBuilder returns the scope to the parent builder - The SubBuilder callback, that was passed by the parent
-  builder, is called, and the subvalue is managed by the parent builder.
-
-The callback passing to the subbuilder decouples completely the child builder from the parent: the responsability of
+This decouples completely the child builder from the parent: the responsability of
 what doing with the builded object is completely on the parent builder.
 
-## Example
+## A simple example
 
-Let's see now a very simple (and a bit naive) example that explains how to define a builder for boolean predicates.
+Let's see now a small example that explains how to define a builder for boolean predicates.
+The example is really simple and it could be improved a lot, but it is fine for our purpose.
 
 You have atomic predicates, like equalities and inequalities, and composite ones, like ANDS and ORS:
 
@@ -60,13 +56,19 @@ class LssThanPredicate implements BooleanPredicate
     ...
 }
 
-class OrPredicate implements BooleanPredicate
+interface CompositePredicate extends BooleanPredicate
+{
+   /** @return $this **/
+   public function add(BooleanPredicate $predicate);
+}
+
+class OrPredicate implements CompositePredicate
 {
    /** @return $this **/
    public function add(BooleanPredicate $predicate) { ... }
 }
 
-class AndPredicate implements BooleanPredicate
+class AndPredicate implements CompositePredicate
 {
    /** @return $this **/
    public function add(BooleanPredicate $predicate) { ... }
@@ -113,7 +115,100 @@ deal with the just builded subvalue.
 
 Going back to our example will clarify the process.
 
+```php
+use NicMart\Building\AbstractBuilder;
 
+abstract class CompositePredicateBuilder
+{
+    /** @var CompositePredicate **/
+    protected $compositePredicate;
+    
+    public function eq($value)
+    {
+        $this->compositePredicate->add(new EqualityPredicate($value));
+        
+        return $this;
+    }
+    
+    public function greaterThan($value)
+    {
+        $this->compositePredicate->add(new GreaterThanPredicate($value));
+        
+        return $this;
+    }
+    
+    public function lessThan($value)
+    {
+        $this->compositePredicate->add(new LessThanPredicate($value));
+        
+        return $this;
+    }
+    
+    public function and()
+    {
+        return new AndPredicate($this->getAddCallback());
+    }
+    
+    public function or()
+    {
+        return new OrPredicate($this->getAddCallback());
+    }
+    
+    /** @return callable **/
+    private function getAddCallback()
+    {
+        return function(BooleanPredicate $predicate)
+        {
+            $this->getCompositePredicate()->add($predicate);
+            
+            // This will be the return value of the end() method
+            return $this;
+        };
+    }
+}
+
+class OrPredicateBuilder extends CompositePredicateBuilder
+{
+    public function __construct(callable $callback = null)
+    {
+        $this->compositePredicate = new OrPredicate;
+    }
+}
+
+class AndPredicateBuilder extends CompositePredicateBuilder
+{
+    public function __construct(callable $callback = null)
+    {
+        $this->compositePredicate = new AndPredicate;
+    }
+}
+```
+
+We can now use the builder to define our predicate in a way closer to the domain of boolean expressions:
+
+```php
+$or = new OrPredicateBuilder;
+
+$predicate = 
+    $or
+       ->and()
+          ->greaterThan(0)
+          ->lessThan(10)
+       ->end()
+       ->or()
+          ->and()
+              ->greaterThan(20)
+              ->lessThan(30)
+          ->end()
+          ->eq(40)
+       ->end()
+       ->greaterThan(100)
+    ->end();
+```
+
+The last `end()` automatically returns the builded object because, by default,
+the abstract builder class sets for itself a callback that returns
+the builded value.
 
 ## Drawbacks
 
