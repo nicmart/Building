@@ -22,7 +22,7 @@ point of the library is to pass a "finalizing callback" from the parent builder 
 that will be called by the child builder when the subvalue has been built.
 
 This decouples completely the child builder from the parent: the responsability of
-what doing with the builded object is completely on the parent builder.
+what doing with the builded object is completely of the parent builder.
 
 ## A simple example
 
@@ -203,7 +203,11 @@ $predicate =
           ->eq(40)
        ->end()
        ->greaterThan(100)
-    ->end();
+    ->end()
+;
+
+$predicate->evaluate(25); // True
+$predicate->evaluate(0);  // False
 ```
 
 The last `end()` automatically returns the builded object because, by default,
