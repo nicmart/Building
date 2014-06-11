@@ -17,16 +17,15 @@ the code to be readable and more [DSL](http://en.wikipedia.org/wiki/Domain-speci
 
 ## How Building works
 
-The approach of this library is to use nested builders to define complex objects, and the main
-point of the library is to pass a "finalizing callback" from the parent builder to the child builder
+The approach of this library is using nested builders to define complex objects, and the key point is passing a "finalizing callback", from the parent builder to the child one,
 that will be called by the child builder when the subvalue has been built.
 
 This decouples completely the child builder from the parent: the responsability of
-what doing with the builded object is completely of the parent builder.
+what to do with the builded object lies completely on the parent builder.
 
 ## A simple example
 
-Let's see now a small example that explains how to define a builder for boolean predicates.
+Let's see now a little example which explains how to define a builder for boolean predicates.
 The example is really simple and it could be improved a lot, but it is fine for our purpose.
 
 You have atomic predicates, like equalities and inequalities, and composite ones, like ANDS and ORS:
