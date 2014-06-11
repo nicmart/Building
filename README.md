@@ -108,7 +108,7 @@ set a callback and implements an `end()` method that will be called by the clien
 when the building of the object has ended. The `end()` method will call the callback and returns 
 the returned value.
 
-In this way the builder responsability is only to build the value, and it delegates completely 
+In this way the builder's responsability is only to build the value, and it delegates completely 
 to the parent builder (calling the callback passed by the parent builder) the responsability to
 deal with the just builded subvalue.
 
