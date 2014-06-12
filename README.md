@@ -117,7 +117,7 @@ Going back to our example will clarify the process.
 ```php
 use NicMart\Building\AbstractBuilder;
 
-abstract class CompositePredicateBuilder
+abstract class CompositePredicateBuilder extends AbstractBuilder
 {
     /** @var CompositePredicate **/
     protected $compositePredicate;
