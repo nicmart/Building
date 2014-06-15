@@ -120,25 +120,25 @@ use NicMart\Building\AbstractBuilder;
 abstract class CompositePredicateBuilder extends AbstractBuilder
 {
     /** @var CompositePredicate **/
-    protected $compositePredicate;
+    protected $building;
     
     public function eq($value)
     {
-        $this->compositePredicate->add(new EqualityPredicate($value));
+        $this->building->add(new EqualityPredicate($value));
         
         return $this;
     }
     
     public function greaterThan($value)
     {
-        $this->compositePredicate->add(new GreaterThanPredicate($value));
+        $this->building->add(new GreaterThanPredicate($value));
         
         return $this;
     }
     
     public function lessThan($value)
     {
-        $this->compositePredicate->add(new LessThanPredicate($value));
+        $this->building->add(new LessThanPredicate($value));
         
         return $this;
     }
@@ -170,7 +170,7 @@ class OrPredicateBuilder extends CompositePredicateBuilder
 {
     public function __construct(callable $callback = null)
     {
-        $this->compositePredicate = new OrPredicate;
+        $this->building = new OrPredicate;
     }
 }
 
@@ -178,7 +178,7 @@ class AndPredicateBuilder extends CompositePredicateBuilder
 {
     public function __construct(callable $callback = null)
     {
-        $this->compositePredicate = new AndPredicate;
+        $this->building = new AndPredicate;
     }
 }
 ```
